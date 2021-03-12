@@ -19,36 +19,36 @@ public class Meeting {
     private String subject;
 
     /**
-     * Avatar Meeting
-     */
-    private int avatarMeeting;
-
-    /**
      * Localisation
      */
-    private String localisation;
+    private MeetingRoom localisation;
 
     /**
-     * Date
+     * Start Date
      */
-    private Date date;
+    private Date startDate;
+
+    /**
+     * End Date
+     */
+    private Date endDate;
 
     /**
      * Participants
      */
-    private String participants;
+    private Participants participants = new Participants();
 
     /**
      * Constructor
      */
 
-    public Meeting(long id, String subject, int avatarMeeting, String localisation,
-                   Date date, String participants) {
+    public Meeting(long id, String subject, MeetingRoom localisation,
+                   Date startDate, Date endDate, Participants participants) {
         this.id = id;
         this.subject = subject;
-        this.avatarMeeting = avatarMeeting;
         this.localisation = localisation;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.participants = participants;
     }
 
@@ -70,35 +70,34 @@ public class Meeting {
         this.subject = subject;
     }
 
-    public int getAvatarMeeting() {
-        return avatarMeeting;
-    }
+    public MeetingRoom getLocalisation() { return localisation; }
 
-    public void setAvatarMeeting(int avatarMeeting) {
-        this.avatarMeeting = avatarMeeting;
-    }
-
-    public String getLocalisation() {
-        return localisation;
-    }
-
-    public void setLocalisation(String localisation) {
+    public void setLocalisation(MeetingRoom localisation) {
         this.localisation = localisation;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public String getParticipants() {
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+
+    public Participants getParticipants() {
         return participants;
     }
 
-    public void setParticipants(String participants) {
+    public void setParticipants(Participants participants) {
         this.participants = participants;
     }
 

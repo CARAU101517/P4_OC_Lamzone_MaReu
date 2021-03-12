@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Ma Réu</string>
+    <string name="app_name">Ma réu</string>
     <string name="content_description_filter">Filter description</string>
     <string name="filter">Filter</string>
-    <string name="avatar_meeting">Avatar Meeting</string>
+    <string name="avatar_meeting_room">Avatar Meeting Room</string>
     <string name="delete_button">Delete Button</string>
     <string name="subject_meeting">Meeting Subject</string>
     <string name="date_meeting">Meeting Date</string>

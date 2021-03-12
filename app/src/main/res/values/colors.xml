@@ -12,20 +12,19 @@
 
     <color name="toolbar">#428de2</color>
     <color name="toolbar_dark">#3475c0</color>
-    <color name="floating_button">#e20000</color>
+    <color name="floating_button">#FFE20035</color>
     <color name="popup_background">#4682B4</color>
 
-    //MEETING COLOR AVATAR
+    //MEETING ROOM COLOR AVATAR
 
-    <color name="ZeusRoom">#ABDEE6</color>
-    <color name="HadesRoom">#C29BA3</color>
-    <color name="AresRoom">#FFFFB5</color>
-    <color name="ApolloRoom">#B7EAF7</color>
-    <color name="AthenaRoom">#F3B0C3</color>
-    <color name="PoseidonRoom">#CCE2CB</color>
-    <color name="HeraRoom">#97C1A9</color>
-    <color name="HermesRoom">#50B4D8</color>
-    <color name="DionysusRoom">#CAB3C1</color>
-    <color name="HeraclesRoom">#57838D</color>
+    <color name="SydneyRoom">#ABDEE6</color>
+    <color name="NewYorkRoom">#C29BA3</color>
+    <color name="LondonRoom">#FFFFB5</color>
+    <color name="OsloRoom">#B7EAF7</color>
+    <color name="RioRoom">#F3B0C3</color>
+    <color name="CapeTownRoom">#CCE2CB</color>
+    <color name="VancouverRoom">#97C1A9</color>
+    <color name="SingaporeRoom">#50B4D8</color>
+    <color name="ParisRoom">#CAB3C1</color>
 
 </resources>

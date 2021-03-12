@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.MeetingRoom;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<Meeting> mMeeting;
     private List<Meeting> filterList ;
+    private List<MeetingRoom> filterList2 ;
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm", Locale.FRANCE);
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
@@ -42,11 +44,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        MeetingRoom meetingRoom = filterList2.get(position);
         Meeting meeting = filterList.get(position);
         holder.mSubject.setText(meeting.getSubject());
         holder.mParticipant.setText(meeting.getParticipants());
-        holder.mLocalisation.setText(meeting.getLocalisation());
-        String mDate = sdf.format(meeting.getDate());
+        holder.mLocalisation.setText(meetingRoom.getRoomName());
+        String mDate = sdf.format(meeting.getStartDate());
         holder.mDate.setText(mDate);
         holder.mDeleteMeeting.setOnClickListener(v -> {
             listener.OnItemClicked(filterList.get(position));
@@ -69,10 +72,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mSubject = itemView.findViewById(R.id.subject_meeting);
-            mDate = itemView.findViewById(R.id.date_meeting);
+            mDate = itemView.findViewById(R.id.start_date_meeting);
             mLocalisation = itemView.findViewById(R.id.localisation_meeting);
             mParticipant = itemView.findViewById(R.id.participant_meeting);
-            mAvatar = itemView.findViewById(R.id.avatar_meeting);
+            mAvatar = itemView.findViewById(R.id.avatar_meeting_room);
             mDeleteMeeting = itemView.findViewById(R.id.item_list_delete_button);
         }
     }
