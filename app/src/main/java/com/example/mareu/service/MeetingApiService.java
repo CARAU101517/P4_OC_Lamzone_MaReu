@@ -1,6 +1,8 @@
 package com.example.mareu.service;
 
+import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.MeetingRoom;
 
 import java.util.List;
 
@@ -33,5 +35,20 @@ public interface MeetingApiService {
      * @param meeting
      */
     void createMeeting(Meeting meeting);
+
+
+    /**
+     * Get all my MeetingRooms
+     *
+     * @return {@link List}
+     */
+    List<MeetingRoom> getMeetingRooms();
+
+    /**
+     * Get all my Employees
+     *
+     * @return {@link List}
+     */
+    List<Employee> getEmployees();
 
 }

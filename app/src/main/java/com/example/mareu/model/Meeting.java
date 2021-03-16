@@ -1,6 +1,10 @@
 package com.example.mareu.model;
 
+import com.example.mareu.service.DummyMeetingGenerator;
+
+import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -36,14 +40,15 @@ public class Meeting {
     /**
      * Participants
      */
-    private Participants participants = new Participants();
+
+    private Employee participants;
 
     /**
      * Constructor
      */
 
     public Meeting(long id, String subject, MeetingRoom localisation,
-                   Date startDate, Date endDate, Participants participants) {
+                   Date startDate, Date endDate, Employee participants) {
         this.id = id;
         this.subject = subject;
         this.localisation = localisation;
@@ -93,11 +98,11 @@ public class Meeting {
     }
 
 
-    public Participants getParticipants() {
+    public Employee getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Participants participants) {
+    public void setParticipants(Employee participants) {
         this.participants = participants;
     }
 

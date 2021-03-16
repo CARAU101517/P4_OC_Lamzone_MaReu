@@ -1,8 +1,16 @@
 package com.example.mareu.model;
 
 import java.util.Objects;
+import java.util.Random;
+
+import static com.example.mareu.service.DummyMeetingGenerator.Dummy_Random_Meetings;
 
 public class Employee {
+
+    /**
+     * Identified
+     */
+    private long id;
 
     /**
      * Last Name
@@ -17,7 +25,7 @@ public class Employee {
     /**
      * Position
      */
-    private String position;
+    private String job;
 
     /**
      * Department
@@ -39,20 +47,26 @@ public class Employee {
      * Constructor
      */
 
-    public Employee(String lastName, String firstName, String position, String department, String email, boolean planner) {
+    public Employee(long id, String lastName, String firstName, String job, String department, String email, boolean planner) {
+        this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.position = position;
+        this.job = job;
         this.department = department;
         this.email = email;
         this.planner = planner;
     }
 
-    public Employee() {
-
-    }
 
     /** Setter and getter */
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLastName() {
         return lastName;
@@ -70,12 +84,12 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getPosition() {
-        return position;
+    public String getJob() {
+        return job;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getDepartment() {
@@ -107,12 +121,13 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(lastName, employee.lastName);
+        return Objects.equals(id, employee.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lastName);
+        return Objects.hash(id);
     }
+
 
 }

@@ -11,7 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.R;
+import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 
@@ -26,7 +29,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<Meeting> mMeeting;
     private List<Meeting> filterList ;
-    private List<MeetingRoom> filterList2 ;
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm", Locale.FRANCE);
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
@@ -44,11 +46,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        MeetingRoom meetingRoom = filterList2.get(position);
         Meeting meeting = filterList.get(position);
+        Glide.with(holder.mAvatar.getContext())
+                .load(meeting.getLocalisation().getAvatarMeetingRoom())
+                .apply(RequestOptions.circleCropTransform())
+                .into(holder.mAvatar);
         holder.mSubject.setText(meeting.getSubject());
-        holder.mParticipant.setText(meeting.getParticipants());
-        holder.mLocalisation.setText(meetingRoom.getRoomName());
+        holder.mParticipant.setText(meeting.getParticipants().getEmail());
+        holder.mLocalisation.setText(meeting.getLocalisation().getRoomName());
         String mDate = sdf.format(meeting.getStartDate());
         holder.mDate.setText(mDate);
         holder.mDeleteMeeting.setOnClickListener(v -> {

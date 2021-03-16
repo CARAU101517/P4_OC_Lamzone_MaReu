@@ -12,7 +12,7 @@ public class MeetingRoom {
     /**
      * Avatar MeetingRoom
      */
-    private int avatarMeetingRoom;
+    private String avatarMeetingRoom;
 
     /**
      * Room Name
@@ -35,7 +35,8 @@ public class MeetingRoom {
      * Constructor
      */
 
-    public MeetingRoom(long id, int avatarMeetingRoom, String roomName, String place, int capacity) {
+    public MeetingRoom(long id, String avatarMeetingRoom, String roomName, String place, int capacity) {
+        this.id = id;
         this.avatarMeetingRoom = avatarMeetingRoom;
         this.roomName = roomName;
         this.place = place;
@@ -52,11 +53,11 @@ public class MeetingRoom {
         this.id = id;
     }
 
-    public int getAvatarMeetingRoom() {
+    public String getAvatarMeetingRoom() {
         return avatarMeetingRoom;
     }
 
-    public void setAvatarMeetingRoom(int avatarMeetingRoom) {
+    public void setAvatarMeetingRoom(String avatarMeetingRoom) {
         this.avatarMeetingRoom = avatarMeetingRoom; }
 
     public String getRoomName() {

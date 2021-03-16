@@ -2,6 +2,7 @@ package com.example.mareu;
 
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.DummyMeetingGenerator;
 import com.example.mareu.service.MeetingApiService;
 
@@ -24,7 +25,7 @@ public void setup() {
         }
 
 @Test
-public void getMeetingWithSucess(){
+public void getMeetingWithSuccess(){
         List<Meeting> meetings = service.getMeeting();
         List<Meeting> expectedMeetings = DummyMeetingGenerator.Dummy_Meetings;
         assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
@@ -39,7 +40,7 @@ public void deleteMeetingWithSuccess() {
 
 @Test
 public void createMeetingWithSuccess() {
-        Meeting meetingToCreate = new Meeting((long) service.getMeeting().size(), "Mon meeting Test", R.drawable.ic_baseline_circle_24, "Room Test", Calendar.getInstance().getTime(), "Test@gmail.com");
+        Meeting meetingToCreate = new Meeting((long) service.getMeeting().size(),"Mon meeting Test", service.getMeetingRooms().get(8), Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), service.getEmployees().get(3-5-6));
         service.createMeeting(meetingToCreate);
         assertTrue(service.getMeeting().contains(meetingToCreate));
         }
