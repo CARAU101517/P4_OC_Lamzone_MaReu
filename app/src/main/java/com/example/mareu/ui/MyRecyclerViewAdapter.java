@@ -47,12 +47,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meeting meeting = filterList.get(position);
-        Glide.with(holder.mAvatar.getContext())
-                .load(meeting.getLocalisation().getAvatarMeetingRoom())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.mAvatar);
+        setRoomColor(holder, meeting.getLocalisation().getId());
         holder.mSubject.setText(meeting.getSubject());
-        holder.mParticipant.setText(meeting.getParticipants().getEmail());
+        holder.mParticipant.setText(addText(meeting.getParticipants()));
         holder.mLocalisation.setText(meeting.getLocalisation().getRoomName());
         String mDate = sdf.format(meeting.getStartDate());
         holder.mDate.setText(mDate);
@@ -66,8 +63,38 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return filterList.size();
     }
 
+    private String addText(ArrayList<Employee> participants) {
+        StringBuilder text = new StringBuilder();
+        text.append(participants.get(0).getEmail());
+        for (int i=1; i<participants.size(); i++) {
+            text.append(", "+participants.get(i).getEmail());
+        }
+        return text.toString();
+    }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    private void setRoomColor(@NonNull MyViewHolder holder, int position) {
+        switch (position) {
+            case 1:
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.SydneyRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+            case 2 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.NewYorkRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+            case 7:
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.VancouverRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+            case 4 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.RioRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+
+            case 10:
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.SanFranciscoRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+        }
+    }
+
+
+            public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView mSubject, mDate, mLocalisation, mParticipant;
         ImageView mAvatar;

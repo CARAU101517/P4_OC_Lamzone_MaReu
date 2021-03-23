@@ -4,6 +4,7 @@ import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DummyMeetingApiService implements MeetingApiService {

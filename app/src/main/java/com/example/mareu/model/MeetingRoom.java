@@ -1,5 +1,7 @@
 package com.example.mareu.model;
 
+import android.graphics.Color;
+
 import java.util.Objects;
 
 
@@ -7,12 +9,12 @@ public class MeetingRoom {
     /**
      * Identified
      */
-    private long id;
+    private int id;
 
     /**
      * Avatar MeetingRoom
      */
-    private String avatarMeetingRoom;
+    private int avatarMeetingRoom;
 
     /**
      * Room Name
@@ -35,7 +37,7 @@ public class MeetingRoom {
      * Constructor
      */
 
-    public MeetingRoom(long id, String avatarMeetingRoom, String roomName, String place, int capacity) {
+    public MeetingRoom(int id, int avatarMeetingRoom, String roomName, String place, int capacity) {
         this.id = id;
         this.avatarMeetingRoom = avatarMeetingRoom;
         this.roomName = roomName;
@@ -45,19 +47,19 @@ public class MeetingRoom {
 
     /** Setter and getter */
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getAvatarMeetingRoom() {
+    public int getAvatarMeetingRoom() {
         return avatarMeetingRoom;
     }
 
-    public void setAvatarMeetingRoom(String avatarMeetingRoom) {
+    public void setAvatarMeetingRoom(int avatarMeetingRoom) {
         this.avatarMeetingRoom = avatarMeetingRoom; }
 
     public String getRoomName() {

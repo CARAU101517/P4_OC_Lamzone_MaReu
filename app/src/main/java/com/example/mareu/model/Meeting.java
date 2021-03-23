@@ -3,6 +3,7 @@ package com.example.mareu.model;
 import com.example.mareu.service.DummyMeetingGenerator;
 
 import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -41,14 +42,14 @@ public class Meeting {
      * Participants
      */
 
-    private Employee participants;
+    private ArrayList<Employee> participants;
 
     /**
      * Constructor
      */
 
     public Meeting(long id, String subject, MeetingRoom localisation,
-                   Date startDate, Date endDate, Employee participants) {
+                   Date startDate, Date endDate, ArrayList<Employee> participants) {
         this.id = id;
         this.subject = subject;
         this.localisation = localisation;
@@ -98,11 +99,11 @@ public class Meeting {
     }
 
 
-    public Employee getParticipants() {
+    public ArrayList<Employee> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Employee participants) {
+    public void setParticipants(ArrayList<Employee> participants) {
         this.participants = participants;
     }
 
