@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -63,6 +66,12 @@ public class AddMeetingActivity extends AppCompatActivity {
         mSubjectInput = findViewById(R.id.add_meeting_subject);
         mSaveMeetingBtn = findViewById(R.id.save_meeting);
         meetingApiService = DI.getMeetingApiService();
+        mAddStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterDateDialog(mAddStartDate);
+            }
+        });
 
     }
 
@@ -81,6 +90,29 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void filterDateDialog(TextView t) {
+
+        // calender class's instance and get current date , month and year from calender
+        final Calendar c = Calendar.getInstance(Locale.FRANCE);
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker date, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, monthOfYear, dayOfMonth);
+                        t.setText(sdf.format(calendar.getTime()));
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 
 }

@@ -35,6 +35,8 @@
             android:id="@+id/add_start_date_meeting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="5dp"
             android:hint="Date de début"/>
