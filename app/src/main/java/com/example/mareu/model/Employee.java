@@ -10,7 +10,7 @@ public class Employee {
     /**
      * Identified
      */
-    private long id;
+    private int id;
 
     /**
      * Last Name
@@ -47,7 +47,7 @@ public class Employee {
      * Constructor
      */
 
-    public Employee(long id, String lastName, String firstName, String job, String department, String email, boolean planner) {
+    public Employee(int id, String lastName, String firstName, String job, String department, String email, boolean planner) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -60,11 +60,11 @@ public class Employee {
 
     /** Setter and getter */
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

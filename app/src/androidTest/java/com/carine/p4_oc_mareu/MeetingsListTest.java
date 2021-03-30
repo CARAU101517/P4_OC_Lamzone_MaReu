@@ -28,9 +28,9 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class MeetingsListTest {
 
-    /*private static int ITEMS_COUNT = 9;
+    private static int ITEMS_COUNT = 9;
     private MeetingListActivity mActivity;
-
+    /**
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityRule = new ActivityTestRule(MeetingListActivity.class);
 
@@ -45,37 +45,41 @@ public class MeetingsListTest {
     }
 
 
-    *//**
-     * We ensure that our recyclerview is displaying at least on item
-     *//*
+
+    /**
+    We ensure that our recyclerview is displaying at least on item
+     */
     @Test
     public void myMeetingsList_shouldNotBeEmpty() {
         onView(allOf(withId(R.id.activity_meeting_list)))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
-    *//**
+    /**
      * When we delete an item, the item is no more shown
-     *//*
+
+
     @Test
     public void myMeetingsList_deleteAction_shouldRemoveItem() {
         // Given : We remove the element at position 2
         onView(allOf(withId(R.id.activity_meeting_list)
-                .check(withItemCount(ITEMS_COUNT));
+                .check(withItemCount(ITEMS_COUNT)),
         // When perform a click on a delete icon
         onView(allOf(withId(R.id.activity_meeting_list)))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(2, new DeleteViewAction()));
         // Then : the number of element is 8
         onView(allOf(withId(R.id.activity_meeting_list))).check(withItemCount(ITEMS_COUNT-1));
     }
+     */
 
-    *//**
+    /**
      * When we add a meeting, the new meeting is showing in the meeting list
-     *//*
+
     @Test
     public void myMeetingsList_createAction_shouldAddItem() {
         onView(withId(R.id.add_meeting)).perform(click());
         onView(withId(R.id.activity_meeting_list)).check(new RecyclerViewUtils.ItemCount(ITEMS_COUNT+1));
-    }*/
+    }
+     */
 
 }

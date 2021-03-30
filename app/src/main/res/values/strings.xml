@@ -12,11 +12,15 @@
     <string name="content_description_localisation"> Description localisation</string>
     <string name="content_description_date"> Description date</string>
     <string name="date"> Date</string>
-    <string name="localisation_filter"> Localisation </string>
+    <string name="localisation_filter"> Salle </string>
     <string name="tous_filter"> Tout </string>
     <string name="date_filter"> Date </string>
     <string name="localisation_popup">Sélectionnez votre salle</string>
     <string name="add_participants_popup">Ajoutez les participants</string>
-    <string name="start_date_popup">Sélectionnez votre horaire de début</string>
-    <string name="end_date_popup">Sélectionnez votre horaire de fin</string>
+    <string name="start_time_popup">Sélectionnez votre horaire de début</string>
+    <string name="end_time_popup">Sélectionnez votre horaire de fin</string>
+    <string name="start_date_popup">Sélectionnez votre date de début</string>
+    <string name="end_date_popup">Sélectionnez votre date de fin</string>
+    <string name="add_meeting_tittle">Ajoutez une nouvelle Réunion</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

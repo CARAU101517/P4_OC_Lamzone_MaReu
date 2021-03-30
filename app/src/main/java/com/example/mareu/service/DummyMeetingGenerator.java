@@ -73,6 +73,12 @@ public abstract class DummyMeetingGenerator {
     );
     static List<Employee> generateFakeParticipants3() { return new ArrayList<>(FAKE_PARTICIPANTS_3); }
 
+    public static Date addDays(Date d)  {
+        int days = new Random().nextInt(8);
+        d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
+        return d;
+    }
+
     public static List<Meeting> Dummy_Meetings = Arrays.asList(
             new Meeting(1,"Subject A",generateMeetingRooms().get(6),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
             new Meeting(2,"Subject B",generateMeetingRooms().get(2),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants1())),
@@ -93,11 +99,6 @@ public abstract class DummyMeetingGenerator {
             new Meeting(13,"Subject O",generateMeetingRooms().get(6),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
             new Meeting(14,"Subject P",generateMeetingRooms().get(4),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants1())));
 
-    public static Date addDays(Date d)  {
-        int days = new Random().nextInt(8);
-        d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
-        return d;
-    }
 
     }
 

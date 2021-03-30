@@ -1,6 +1,7 @@
 package com.example.mareu;
 
 import com.example.mareu.di.DI;
+import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.DummyMeetingGenerator;
@@ -10,6 +11,7 @@ import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -40,7 +42,8 @@ public void deleteMeetingWithSuccess() {
 
 @Test
 public void createMeetingWithSuccess() {
-        Meeting meetingToCreate = new Meeting((long) service.getMeeting().size(),"Mon meeting Test", service.getMeetingRooms().get(8), Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), service.getEmployees().get(3-5-6));
+        Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test", service.getMeetingRooms().get(8),
+                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
         service.createMeeting(meetingToCreate);
         assertTrue(service.getMeeting().contains(meetingToCreate));
         }

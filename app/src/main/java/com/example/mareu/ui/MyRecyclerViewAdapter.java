@@ -11,14 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.R;
 import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
-import com.example.mareu.model.MeetingRoom;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +25,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<Meeting> mMeeting;
     private List<Meeting> filterList ;
-    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm", Locale.FRANCE);
+    SimpleDateFormat dateAndTimeFormat = new SimpleDateFormat("dd/MM/yy"+" - "+"hh:mm", Locale.FRANCE);
+
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
         mMeeting = items;
@@ -42,6 +39,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.recyclerview_item_meeting, parent, false);
         return new MyViewHolder(view);
+
     }
 
     @Override
@@ -51,11 +49,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.mSubject.setText(meeting.getSubject());
         holder.mParticipant.setText(addText(meeting.getParticipants()));
         holder.mLocalisation.setText(meeting.getLocalisation().getRoomName());
-        String mDate = sdf.format(meeting.getStartDate());
+        String mDate = dateAndTimeFormat.format(meeting.getStartDate());
         holder.mDate.setText(mDate);
         holder.mDeleteMeeting.setOnClickListener(v -> {
             listener.OnItemClicked(filterList.get(position));
         });
+
     }
 
     @Override
@@ -80,21 +79,33 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             case 2 :
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.NewYorkRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
-            case 7:
-                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.VancouverRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+            case 3 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.LondonRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 4 :
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.RioRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
-
+            case 5 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.OsloRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+            case 6 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.CapeTownRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+            case 7:
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.VancouverRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+            case 8 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.SingaporeRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
+            case 9 :
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.ParisRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
+                break;
             case 10:
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.SanFranciscoRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
         }
     }
 
-
-            public class MyViewHolder extends RecyclerView.ViewHolder {
+        public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView mSubject, mDate, mLocalisation, mParticipant;
         ImageView mAvatar;
@@ -103,11 +114,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            mAvatar = itemView.findViewById(R.id.avatar_meeting_room);
             mSubject = itemView.findViewById(R.id.subject_meeting);
             mDate = itemView.findViewById(R.id.start_date_meeting);
             mLocalisation = itemView.findViewById(R.id.localisation_meeting);
             mParticipant = itemView.findViewById(R.id.participant_meeting);
-            mAvatar = itemView.findViewById(R.id.avatar_meeting_room);
             mDeleteMeeting = itemView.findViewById(R.id.item_list_delete_button);
         }
     }
@@ -120,6 +131,39 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     public interface ItemClickListener {
         void OnItemClicked(Meeting meeting);
+    }
+
+    public void filterRoom(ArrayList<String> rooms ) {
+        if (rooms == null || rooms.isEmpty()){
+            filterList = mMeeting;
+        }else {
+            ArrayList<Meeting> resultList = new ArrayList<>();
+            for (String room : rooms) {
+                for (Meeting meeting : mMeeting) {
+                    if (room.equalsIgnoreCase(meeting.getLocalisation().getRoomName())) {
+                        resultList.add(meeting);
+                    }
+                }
+                filterList = resultList;
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void filterDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+        if (date == null) {
+            filterList = mMeeting;
+        } else {
+            ArrayList<Meeting> resultListDate = new ArrayList<>();
+            for (Meeting meeting : mMeeting) {
+                if (sdf.format(date).equalsIgnoreCase(sdf.format(meeting.getStartDate()))) {
+                    resultListDate.add(meeting);
+                }
+                filterList = resultListDate;
+            }
+        }
+        notifyDataSetChanged();
     }
 
 
