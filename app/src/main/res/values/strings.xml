@@ -22,5 +22,5 @@
     <string name="start_date_popup">Sélectionnez votre date de début</string>
     <string name="end_date_popup">Sélectionnez votre date de fin</string>
     <string name="add_meeting_tittle">Ajoutez une nouvelle Réunion</string>
-    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
 </resources>

@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ui.AddMeetingActivity"
-            android:theme="@style/Theme.MaReu"></activity>
+            android:theme="@style/Theme.MaReu"
+            ></activity>
         <activity android:name=".ui.MeetingListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
