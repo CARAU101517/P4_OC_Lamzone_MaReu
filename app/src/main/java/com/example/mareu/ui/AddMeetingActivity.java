@@ -1,5 +1,6 @@
 package com.example.mareu.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -8,8 +9,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,6 +37,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -42,11 +46,11 @@ public class AddMeetingActivity extends AppCompatActivity {
     public TextView mAddStartDateAndTime;
     public TextView mAddEndDateAndTime;
     public TextView mAddRoom;
-        public TextView mEmails ;
+    public TextView mEmails;
     public TextInputLayout mSubject;
     public TextInputEditText mSubjectInput;
     public Button mSaveMeetingBtn;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy"+" - "+"hh:mm", Locale.FRANCE);
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy" + " - " + "hh:mm", Locale.FRANCE);
 
     MeetingApiService meetingApiService;
 
@@ -70,12 +74,23 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         mAddStartDateAndTime.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { startDateTimePickerDialog(mAddStartDateAndTime); }
+            public void onClick(View view) {
+                startDateTimePickerDialog(mAddStartDateAndTime);
+            }
         });
 
         mAddEndDateAndTime.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { endDateTimePickerDialog(mAddEndDateAndTime); }
+            public void onClick(View view) {
+                endDateTimePickerDialog(mAddEndDateAndTime);
+            }
+        });
+
+        mAddRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addRoomDialog(mAddRoom);
+            }
         });
     }
 
@@ -87,7 +102,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home : {
+            case android.R.id.home: {
                 finish();
                 return true;
             }
@@ -116,17 +131,17 @@ public class AddMeetingActivity extends AppCompatActivity {
                     }
                 }, mYear, mMonth, mDay);
 
-                        // time picker dialog
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                Calendar timeCalendar = Calendar.getInstance();
-                                timeCalendar.set(i, i1);
-                                t.setText(sdf.format(timeCalendar.getTime()));
-                            }
-                                    }, mHour, mMinute, true);
-                        timePickerDialog.show();
+        // time picker dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        Calendar timeCalendar = Calendar.getInstance();
+                        timeCalendar.set(i, i1);
+                        t.setText(sdf.format(timeCalendar.getTime()));
+                    }
+                }, mHour, mMinute, true);
+        timePickerDialog.show();
 
         datePickerDialog.show();
     }
@@ -167,7 +182,47 @@ public class AddMeetingActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-}
+    public void addRoomDialog(TextView mAddRoom) {
+        String[] roomsList = {"Sydney", "New York", "London", "Rio", "Oslo", "Cape Town", "Vancouver", "Singapore", "Paris", "San Francisco"};
+        boolean[] isCheckedList = {false, false, false, false, false, false, false, false, false, false};
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sélectionnez votre salle");
+        builder.setMultiChoiceItems(roomsList, isCheckedList, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                isCheckedList[which] = isChecked;
+                mAddRoom.setText(isCheckedList.toString());
+            }
+
+        });
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        Dialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+
+    }
+
+
+
 
 
 
