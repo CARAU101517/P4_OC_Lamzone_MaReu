@@ -4,40 +4,28 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.provider.CalendarContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
-import com.example.mareu.model.Meeting;
 import com.example.mareu.service.MeetingApiService;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -51,8 +39,13 @@ public class AddMeetingActivity extends AppCompatActivity {
     public TextInputEditText mSubjectInput;
     public Button mSaveMeetingBtn;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy" + " - " + "hh:mm", Locale.FRANCE);
+    final Calendar calendarBegin = Calendar.getInstance(Locale.FRANCE);
+
+
 
     MeetingApiService meetingApiService;
+
+
 
 
     @Override
@@ -110,14 +103,13 @@ public class AddMeetingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startDateTimePickerDialog(TextView t) {
+    public void startDateTimePickerDialog(TextView mAddStartDateAndTime) {
         // calender class's instance and get current date , month and year from calender
-        final Calendar c = Calendar.getInstance(Locale.FRANCE);
-        int mYear = c.get(Calendar.YEAR); // current year
-        int mMonth = c.get(Calendar.MONTH); // current month
-        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-        int mHour = c.get(Calendar.HOUR_OF_DAY); // current hour
-        int mMinute = c.get(Calendar.MINUTE); // current minute
+        int mYear = calendarBegin.get(Calendar.YEAR); // current year
+        int mMonth = calendarBegin.get(Calendar.MONTH); // current month
+        int mDay = calendarBegin.get(Calendar.DAY_OF_MONTH); // current day
+        int mHour = calendarBegin.get(Calendar.HOUR_OF_DAY); // current hour
+        int mMinute = calendarBegin.get(Calendar.MINUTE); // current minute
         // date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
@@ -125,9 +117,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker date, int year,
                                           int monthOfYear, int dayOfMonth) {
                         // set day of month , month and year value in the edit text
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(year, monthOfYear, dayOfMonth);
-                        t.setText(sdf.format(calendar.getTime()));
+                        calendarBegin.set(year, monthOfYear, dayOfMonth);
+                        mAddStartDateAndTime.setText(sdf.format(calendarBegin.getTime()));
                     }
                 }, mYear, mMonth, mDay);
 
@@ -136,9 +127,9 @@ public class AddMeetingActivity extends AppCompatActivity {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        Calendar timeCalendar = Calendar.getInstance();
-                        timeCalendar.set(i, i1);
-                        t.setText(sdf.format(timeCalendar.getTime()));
+                        calendarBegin.set(Calendar.HOUR_OF_DAY, i);
+                        calendarBegin.set(Calendar.MINUTE, i1);
+                        mAddStartDateAndTime.setText(sdf.format(calendarBegin.getTime()));
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
@@ -146,14 +137,13 @@ public class AddMeetingActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public void endDateTimePickerDialog(TextView textView) {
-        // calender class's instance and get current date , month and year from calender
-        final Calendar c = Calendar.getInstance(Locale.FRANCE);
-        int mYear = c.get(Calendar.YEAR); // current year
-        int mMonth = c.get(Calendar.MONTH); // current month
-        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-        int mHour = c.get(Calendar.HOUR_OF_DAY); // current hour
-        int mMinute = c.get(Calendar.MINUTE); // current minute
+    public void endDateTimePickerDialog(TextView mAddEndDateAndTime) {
+        // calender class's instance and get start date meeting , month and year from calender
+        int mYear = calendarBegin.get(Calendar.YEAR); // start year
+        int mMonth = calendarBegin.get(Calendar.MONTH); // star month
+        int mDay = calendarBegin.get(Calendar.DAY_OF_MONTH); // start day
+        int mHour = calendarBegin.get(Calendar.HOUR_OF_DAY); // start hour
+        int mMinute = calendarBegin.get(Calendar.MINUTE); // start minute
         // date picker dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
@@ -161,9 +151,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker date, int year,
                                           int monthOfYear, int dayOfMonth) {
                         // set day of month , month and year value in the edit text
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(year, monthOfYear, dayOfMonth);
-                        textView.setText(sdf.format(calendar.getTime()));
+                        calendarBegin.set(year, monthOfYear, dayOfMonth);
+                        mAddEndDateAndTime.setText(sdf.format(calendarBegin.getTime()));
                     }
                 }, mYear, mMonth, mDay);
 
@@ -172,9 +161,9 @@ public class AddMeetingActivity extends AppCompatActivity {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        Calendar timeCalendar = Calendar.getInstance();
-                        timeCalendar.set(i, i1);
-                        textView.setText(sdf.format(timeCalendar.getTime()));
+                        calendarBegin.set(Calendar.HOUR_OF_DAY, i);
+                        calendarBegin.set(Calendar.MINUTE, i1);
+                        mAddEndDateAndTime.setText(sdf.format(calendarBegin.getTime()));
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
@@ -217,6 +206,8 @@ public class AddMeetingActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
+
 
 
     }
