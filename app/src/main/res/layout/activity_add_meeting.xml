@@ -61,11 +61,12 @@
             android:focusable="true"
             android:hint="Salle" />
 
-        <TextView
+        <MultiAutoCompleteTextView
             android:id="@+id/participants"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:layout_marginTop="20dp"
+            android:textSize="16dp"
             android:hint="Participants" />
 
         <com.google.android.material.textfield.TextInputLayout
