@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:enabled="false"
+            android:enabled="true"
             android:text="Save"
             android:textStyle="bold"
             app:cornerRadius="20dp" />

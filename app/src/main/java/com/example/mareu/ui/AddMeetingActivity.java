@@ -225,24 +225,28 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     public void saveNewMeeting(){
-        /**
-        String[] emailArray = mEmails.getText().toString().split(", ");
-        Meeting meeting = new Meeting(32, mSubject.getEditText().getText().toString(), mAddRoom.getText(), calendarBegin.getTime(), calendarEnd.getTime(), getListEmployee(emailArray));
+        String room = mSpinnerRoom.getOnItemSelectedListener().toString();
+        String[] emailsArray = mEmails.getText().toString().split(", ");
+        Meeting meeting = new Meeting(32, mSubject.getEditText().getText().toString(), getRoomName(room), calendarBegin.getTime(), calendarEnd.getTime(), getListEmployee(emailsArray));
         meetingApiService.createMeeting(meeting);
         finish();
-        */
     }
 
 
+    public MeetingRoom getRoomName(String roomName) {
+        MeetingRoom listMeetingRooms = DummyMeetingGenerator.generateMeetingRooms().get(0);
+        return listMeetingRooms;
+    }
+
     public ArrayList<Employee> getListEmployee(String[] emails) {
-        ArrayList<Employee> listEmployee = new ArrayList<>();
+        ArrayList<Employee> listEmployees = new ArrayList<>();
         for (String i : emails) {
             Employee employee = DummyMeetingGenerator.generateEmployees().get(0);
             if (employee != null) {
-                listEmployee.add(employee);
+                listEmployees.add(employee);
             }
         }
-        return listEmployee;
+        return listEmployees;
     }
 
 }
