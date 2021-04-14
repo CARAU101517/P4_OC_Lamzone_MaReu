@@ -27,18 +27,18 @@
                 android:src="@drawable/ic_baseline_circle_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/subject_meeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Réunion"
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
+                android:text="Réunion"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+                app:layout_constraintBottom_toTopOf="@id/participant_meeting"
                 app:layout_constraintLeft_toRightOf="@id/avatar_meeting_room"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+                app:layout_constraintBottom_toTopOf="@id/participant_meeting"
                 app:layout_constraintLeft_toRightOf="@id/divider1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,9 +88,10 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+                app:layout_constraintBottom_toTopOf="@id/participant_meeting"
                 app:layout_constraintLeft_toRightOf="@id/divider2"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/item_list_delete_button"
@@ -104,35 +105,23 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.692" />
 
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/participant_meeting"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/avatar_meeting_room"
                 app:layout_constraintLeft_toRightOf="@id/avatar_meeting_room"
                 app:layout_constraintRight_toLeftOf="@+id/item_list_delete_button"
                 app:layout_constraintStart_toStartOf="@+id/subject_meeting"
-                app:layout_constraintTop_toBottomOf="@id/subject_meeting">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="59dp">
-
-                    <TextView
-                        android:id="@+id/participant_meeting"
-                        android:layout_width="270dp"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                app:layout_constraintTop_toBottomOf="@id/subject_meeting" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
