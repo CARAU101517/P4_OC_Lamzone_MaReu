@@ -96,6 +96,11 @@ public class MeetingRoom {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return roomName;
+    }
+
 }
 
 

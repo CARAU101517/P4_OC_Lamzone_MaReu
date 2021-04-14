@@ -15,11 +15,13 @@ import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -46,6 +48,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     public TextView mAddStartDateAndTime;
     public TextView mAddEndDateAndTime;
     public TextView mAddRoom;
+    public Spinner mSpinnerRoom;
     public MultiAutoCompleteTextView mEmails;
     public TextInputLayout mSubject;
     public TextInputEditText mSubjectInput;
@@ -70,6 +73,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         mAddStartDateAndTime = findViewById(R.id.add_start_date_and_time_meeting);
         mAddEndDateAndTime = findViewById(R.id.add_end_date_and_time_meeting);
         mAddRoom = findViewById(R.id.add_meeting_room);
+        mSpinnerRoom = findViewById(R.id.spinner_meeting_room);
         mEmails = findViewById(R.id.participants);
         mSubject = findViewById(R.id.meeting_subjectLyt);
         mSubjectInput = findViewById(R.id.add_meeting_subject);
@@ -91,12 +95,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         });
 
-        mAddRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addRoomDialog(mAddRoom);
-            }
-        });
+        addRoomSpinner();
 
         mEmails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,27 +194,23 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
 
-    public void addRoomDialog(TextView mAddRoom) {
-        CharSequence[] roomList = new CharSequence[]{"Sydney", "New York", "London", "Rio", "Oslo", "Cape Town", "Vancouver", "Singapore", "Paris", "San Francisco"};
-        final CharSequence[] mRoomSelected = new CharSequence[]{""};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Sélectionnez votre salle");
-        builder.setSingleChoiceItems(roomList, 0, new DialogInterface.OnClickListener() {
+    public void addRoomSpinner() {
+        List<MeetingRoom> rooms = new ArrayList<>();
+        rooms.addAll(DummyMeetingGenerator.generateMeetingRooms());
+        ArrayAdapter<MeetingRoom> adapter = new ArrayAdapter<MeetingRoom>(this, android.R.layout.simple_spinner_item, rooms);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerRoom.setAdapter(adapter);
+        mSpinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mRoomSelected[0] = roomList[which];
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-
-        builder.setPositiveButton("OK", (dialog, which) -> {
-            mAddRoom.setText(mRoomSelected[0].toString());
-            dialog.dismiss();
-        });
-
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        Dialog dialog = builder.create();
-        dialog.show();
-
     }
 
 
@@ -230,17 +225,19 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     public void saveNewMeeting(){
+        /**
         String[] emailArray = mEmails.getText().toString().split(", ");
         Meeting meeting = new Meeting(32, mSubject.getEditText().getText().toString(), mAddRoom.getText(), calendarBegin.getTime(), calendarEnd.getTime(), getListEmployee(emailArray));
         meetingApiService.createMeeting(meeting);
         finish();
+        */
     }
 
 
     public ArrayList<Employee> getListEmployee(String[] emails) {
         ArrayList<Employee> listEmployee = new ArrayList<>();
         for (String i : emails) {
-            Employee employee = DummyMeetingGenerator.generateEmployees().get();
+            Employee employee = DummyMeetingGenerator.generateEmployees().get(0);
             if (employee != null) {
                 listEmployee.add(employee);
             }
@@ -248,7 +245,9 @@ public class AddMeetingActivity extends AppCompatActivity {
         return listEmployee;
     }
 
-    }
+}
+
+
 
 
 
