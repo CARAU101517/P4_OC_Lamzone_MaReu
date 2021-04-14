@@ -46,7 +46,7 @@ public abstract class DummyMeetingGenerator {
             new Employee(11,"Thibault", "Chris", "Directeur Technique", "Technique", "chris@lamzone.com", true)
     );
 
-    static List<Employee> generateEmployees() { return new ArrayList<>(EMPLOYEES); }
+    public static List<Employee> generateEmployees() { return new ArrayList<>(EMPLOYEES); }
 
 
     public static List<Employee> FAKE_PARTICIPANTS_1 = Arrays.asList(

@@ -27,6 +27,7 @@ import com.example.mareu.R;
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.DummyMeetingGenerator;
 import com.example.mareu.service.MeetingApiService;
 import com.google.android.material.textfield.TextInputEditText;
@@ -35,6 +36,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
@@ -50,9 +52,10 @@ public class AddMeetingActivity extends AppCompatActivity {
     public Button mSaveMeetingBtn;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy" + " - " + "HH:mm", Locale.FRANCE);
     final Calendar calendarBegin = Calendar.getInstance(Locale.FRANCE);
-
+    final Calendar calendarEnd = Calendar.getInstance(Locale.FRANCE);
 
     MeetingApiService meetingApiService;
+
 
 
 
@@ -97,12 +100,12 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         mEmails.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { addParticipants(mEmails);}
+            public void onClick(View view) { addParticipants();}
         });
 
         mSaveMeetingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { saveMeeting(); }
+            public void onClick(View view) { saveNewMeeting(); }
         });
 
     }
@@ -171,8 +174,8 @@ public class AddMeetingActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker date, int year,
                                           int monthOfYear, int dayOfMonth) {
                         // set day of month , month and year value in the edit text
-                        calendarBegin.set(year, monthOfYear, dayOfMonth);
-                        mAddEndDateAndTime.setText(sdf.format(calendarBegin.getTime()));
+                        calendarEnd.set(year, monthOfYear, dayOfMonth);
+                        mAddEndDateAndTime.setText(sdf.format(calendarEnd.getTime()));
                     }
                 }, mYear, mMonth, mDay);
 
@@ -216,23 +219,34 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
 
-    public void addParticipants(MultiAutoCompleteTextView mEmails){
-        String[] employeesEmails = {"alex@lamzone.com","amandine@lamzone.com","paul@lamzone.com", "antoine@lamzone.com", "viviane@lamzone.com", "justin@lamzone.com",
-                "gaelle@lamzone.com", "martin@lamzone.com", "luc@lamzone.com", "agathe@lamzone.com", "chris@lamzone.com"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, employeesEmails);
+    public void addParticipants(){
+        List<Employee> employees = new ArrayList<>();
+        employees.addAll(DummyMeetingGenerator.generateEmployees());
+        ArrayAdapter<Employee> adapter = new ArrayAdapter<Employee>(this, android.R.layout.simple_list_item_1, employees);
         mEmails.setAdapter(adapter);
         mEmails.setThreshold(1);
         mEmails.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 
 
-
-
-    public void saveMeeting(){
-
+    public void saveNewMeeting(){
+        String[] emailArray = mEmails.getText().toString().split(", ");
+        Meeting meeting = new Meeting(32, mSubject.getEditText().getText().toString(), mAddRoom.getText(), calendarBegin.getTime(), calendarEnd.getTime(), getListEmployee(emailArray));
+        meetingApiService.createMeeting(meeting);
+        finish();
     }
 
 
+    public ArrayList<Employee> getListEmployee(String[] emails) {
+        ArrayList<Employee> listEmployee = new ArrayList<>();
+        for (String i : emails) {
+            Employee employee = DummyMeetingGenerator.generateEmployees().get();
+            if (employee != null) {
+                listEmployee.add(employee);
+            }
+        }
+        return listEmployee;
+    }
 
     }
 

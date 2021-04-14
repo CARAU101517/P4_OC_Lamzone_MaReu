@@ -16,7 +16,7 @@ public class Meeting {
     /**
      * Identifier
      */
-    private int id;
+    private long id;
 
     /**
      * Meeting subject
@@ -48,7 +48,7 @@ public class Meeting {
      * Constructor
      */
 
-    public Meeting(int id, String subject, MeetingRoom localisation,
+    public Meeting(long id, String subject, MeetingRoom localisation,
                    Date startDate, Date endDate, ArrayList<Employee> participants) {
         this.id = id;
         this.subject = subject;
@@ -60,7 +60,7 @@ public class Meeting {
 
     /** Setter and getter */
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

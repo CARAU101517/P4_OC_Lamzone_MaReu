@@ -3,6 +3,7 @@ package com.example.mareu.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +25,8 @@ import java.util.Locale;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
 
     private List<Meeting> mMeeting;
-    private List<Meeting> filterList ;
-    SimpleDateFormat dateAndTimeFormat = new SimpleDateFormat("dd/MM/yy"+" - "+"hh:mm", Locale.FRANCE);
+    private List<Meeting> filterList;
+    SimpleDateFormat dateAndTimeFormat = new SimpleDateFormat("dd/MM/yy"+" - "+"HH:mm", Locale.FRANCE);
 
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
