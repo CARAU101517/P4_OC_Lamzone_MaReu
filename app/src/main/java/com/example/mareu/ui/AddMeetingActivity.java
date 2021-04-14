@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -100,6 +102,17 @@ public class AddMeetingActivity extends AppCompatActivity {
         mEmails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { addParticipants();}
+        });
+
+        mSubject.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                mSaveMeetingBtn.setEnabled(s.length() > 0);
+            }
         });
 
         mSaveMeetingBtn.setOnClickListener(new View.OnClickListener() {
