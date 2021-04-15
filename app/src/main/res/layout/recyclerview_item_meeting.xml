@@ -33,12 +33,11 @@
                 android:id="@+id/subject_meeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
-                android:text="Réunion"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/participant_meeting"
+                app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
                 app:layout_constraintLeft_toRightOf="@id/avatar_meeting_room"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +62,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/participant_meeting"
+                app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
                 app:layout_constraintLeft_toRightOf="@id/divider1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +87,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/participant_meeting"
+                app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
                 app:layout_constraintLeft_toRightOf="@id/divider2"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,22 +106,33 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.692" />
 
-            <TextView
-                android:id="@+id/participant_meeting"
-                android:layout_width="270dp"
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:ellipsize="end"
-                android:focusable="true"
-                android:maxLines="1"
-                android:scrollHorizontally="true"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/avatar_meeting_room"
-                app:layout_constraintLeft_toRightOf="@id/avatar_meeting_room"
-                app:layout_constraintRight_toLeftOf="@+id/item_list_delete_button"
-                app:layout_constraintStart_toStartOf="@+id/subject_meeting"
-                app:layout_constraintTop_toBottomOf="@id/subject_meeting" />
 
+                app:layout_constraintBottom_toBottomOf="@+id/avatar_meeting_room"
+                app:layout_constraintEnd_toStartOf="@+id/item_list_delete_button"
+                app:layout_constraintStart_toStartOf="@+id/subject_meeting"
+                app:layout_constraintTop_toBottomOf="@id/subject_meeting">
+
+                <TextView
+                    android:id="@+id/participant_meeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:ellipsize="end"
+                    android:focusable="true"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_meeting_room"
+                    app:layout_constraintLeft_toRightOf="@id/avatar_meeting_room"
+                    app:layout_constraintRight_toLeftOf="@+id/item_list_delete_button"
+                    app:layout_constraintStart_toStartOf="@+id/subject_meeting"
+                    app:layout_constraintTop_toBottomOf="@id/subject_meeting" />
+
+            </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

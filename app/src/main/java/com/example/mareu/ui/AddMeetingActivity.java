@@ -63,8 +63,6 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -247,22 +245,37 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     public MeetingRoom getRoomName(String roomName) {
+
         MeetingRoom listMeetingRooms = DummyMeetingGenerator.generateMeetingRooms().get(0);
         return listMeetingRooms;
     }
 
+
+    private ArrayList<Employee> getParticipants() {
+        ArrayList<Employee> participantsList = new ArrayList<>();
+        participantsList.get(0);
+        for (int i=1; i<participantsList.size(); i++) {
+            participantsList.get(i);
+        }
+        return participantsList;
+    }
+
     public ArrayList<Employee> getListEmployee(String[] emails) {
         ArrayList<Employee> listEmployees = new ArrayList<>();
-        for (String i : emails) {
-            Employee employee = DummyMeetingGenerator.generateEmployees().get(0);
-            if (employee != null) {
-                listEmployees.add(employee);
+            for (String i : emails) {
+                Employee employee = DummyMeetingGenerator.generateEmployees().get(0);
+                if (employee != null) {
+                    listEmployees.add(employee);
+                }
             }
-        }
         return listEmployees;
     }
 
 }
+
+
+
+
 
 
 

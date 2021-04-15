@@ -96,9 +96,10 @@ public class MeetingRoom {
         return Objects.hash(id);
     }
 
-    @Override
     public String toString() {
-        return roomName;
+            int capacity = getCapacity() ;
+            String capacityNb = String.valueOf(capacity);
+        return (roomName + " - "+ "Capacité de " + capacityNb + " personnes");
     }
 
 
