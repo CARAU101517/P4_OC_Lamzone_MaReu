@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.bumptech.glide.load.resource.gif.GifDrawableEncoder;
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Employee;
@@ -60,6 +61,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     final Calendar calendarEnd = Calendar.getInstance(Locale.FRANCE);
 
     MeetingApiService meetingApiService;
+    Meeting mMeeting;
 
 
 
@@ -214,7 +216,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         mSpinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
+                adapterView.getItemAtPosition(position);
             }
 
             @Override
@@ -236,43 +238,53 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     public void saveNewMeeting(){
-        String room = mSpinnerRoom.getOnItemSelectedListener().toString();
+        String roomName = mSpinnerRoom.toString();
+        int roomPosition = mSpinnerRoom.getSelectedItemPosition();
         String[] emailsArray = mEmails.getText().toString().split(", ");
-        Meeting meeting = new Meeting(32, mSubject.getEditText().getText().toString(), getRoomName(room), calendarBegin.getTime(), calendarEnd.getTime(), getListEmployee(emailsArray));
+        Meeting meeting = new Meeting(32,
+                mSubject.getEditText().getText().toString(),
+                getRoom(roomName, roomPosition),
+                calendarBegin.getTime(),
+                calendarEnd.getTime(),
+                getParticipants(emailsArray)
+        );
         meetingApiService.createMeeting(meeting);
         finish();
     }
 
 
-    public MeetingRoom getRoomName(String roomName) {
-
-        MeetingRoom listMeetingRooms = DummyMeetingGenerator.generateMeetingRooms().get(0);
-        return listMeetingRooms;
+    public MeetingRoom getRoom(String room, int position) {
+        MeetingRoom meetingRoom = DummyMeetingGenerator.generateMeetingRooms().get(position);
+        return meetingRoom;
     }
 
-
-    private ArrayList<Employee> getParticipants() {
-        ArrayList<Employee> participantsList = new ArrayList<>();
-        participantsList.get(0);
-        for (int i=1; i<participantsList.size(); i++) {
-            participantsList.get(i);
-        }
-        return participantsList;
+    public ArrayList<Employee> getParticipants(String[] emails) {
+        ArrayList<Employee> participants = new ArrayList<>();
+        for (String i : emails) {
+            Employee employee = DummyMeetingGenerator.generateEmployees().get(0);
+            //for (int i1 = 0; i1 < DummyMeetingGenerator.generateEmployees().size(); i1++) {
+               // employee = DummyMeetingGenerator.generateEmployees().get(i1);
+                if (employee != null) {
+                    participants.add(employee);
+                }
+            }
+        return participants;
     }
 
-    public ArrayList<Employee> getListEmployee(String[] emails) {
+    /*public ArrayList<Employee> getListEmployee(String[] emails, int position) {
         ArrayList<Employee> listEmployees = new ArrayList<>();
-            for (String i : emails) {
-                Employee employee = DummyMeetingGenerator.generateEmployees().get(0);
+        for (String i : emails) {
+            Employee employee = DummyMeetingGenerator.generateEmployees().get(position);
                 if (employee != null) {
                     listEmployees.add(employee);
                 }
             }
         return listEmployees;
+    }**/
+
+
+
     }
-
-}
-
 
 
 
