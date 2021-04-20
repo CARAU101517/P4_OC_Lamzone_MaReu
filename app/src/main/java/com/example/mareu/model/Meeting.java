@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
-import static com.example.mareu.service.DummyMeetingGenerator.Dummy_Random_Meetings;
+
 
 public class Meeting {
 
@@ -118,7 +117,4 @@ public class Meeting {
         return Objects.hash(id);
     }
 
-    public static Meeting random() {
-        return Dummy_Random_Meetings.get(new Random().nextInt(Dummy_Random_Meetings.size()));
-    }
 }

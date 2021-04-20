@@ -29,68 +29,29 @@ public abstract class DummyMeetingGenerator {
             new MeetingRoom(9,R.color.ParisRoom, "Paris", "3ème étage", 12),
             new MeetingRoom(10,R.color.SanFranciscoRoom, "San Francisco", "3ème étage", 4)
     );
-
     public static List<MeetingRoom> generateMeetingRooms() { return new ArrayList<>(MEETING_ROOMS); }
 
-    public static List<Employee> EMPLOYEES = Arrays.asList(
-            new Employee(1,"Durand", "Alex", "Commercial", "Commercial", "alex@lamzone.com", false),
-            new Employee(2,"Martin", "Amandine", "Directrice Commercial", "Commercial", "amandine@lamzone.com", true),
-            new Employee(3,"Gagné", "Paul", "Développeur", "Technique", "paul@lamzone.com", false),
-            new Employee(4,"Tremblay", "Antoine", "Direncteur Achats", "Achats", "antoine@lamzone.com", true),
-            new Employee(5,"Dupont", "Viviane", "Assistante", "Commercial", "viviane@lamzone.com", false),
-            new Employee(6,"Côté", "Justin", "Directeur RH", "RH", "justin@lamzone.com", true),
-            new Employee(7,"Lapointe", "Gaelle", "Développeuse", "Technique", "gaelle@lamzone.com", false),
-            new Employee(8,"Leblanc", "Martin", "Comptable", "Finance", "martin@lamzone.com", true),
-            new Employee(9,"Poirier", "Luc", "Assistant Marketing", "Marketing", "luc@lamzone.com", false),
-            new Employee(10,"Fournier", "Agathe", "Directrice Marketing", "Marketing", "agathe@lamzone.com", true),
-            new Employee(11,"Thibault", "Chris", "Directeur Technique", "Technique", "chris@lamzone.com", true)
-    );
 
+    public static List<Employee> EMPLOYEES = Arrays.asList(
+            new Employee(1,"Durand", "Alex", "Commercial", "Commercial", "alex@lamzone.com"),
+            new Employee(2,"Martin", "Amandine", "Directrice Commercial", "Commercial", "amandine@lamzone.com"),
+            new Employee(3,"Gagné", "Paul", "Développeur", "Technique", "paul@lamzone.com"),
+            new Employee(4,"Tremblay", "Antoine", "Direncteur Achats", "Achats", "antoine@lamzone.com"),
+            new Employee(5,"Dupont", "Viviane", "Assistante", "Commercial", "viviane@lamzone.com"),
+            new Employee(6,"Côté", "Justin", "Directeur RH", "RH", "justin@lamzone.com"),
+            new Employee(7,"Lapointe", "Gaelle", "Développeuse", "Technique", "gaelle@lamzone.com"),
+            new Employee(8,"Leblanc", "Martin", "Comptable", "Finance", "martin@lamzone.com"),
+            new Employee(9,"Poirier", "Luc", "Assistant Marketing", "Marketing", "luc@lamzone.com"),
+            new Employee(10,"Fournier", "Agathe", "Directrice Marketing", "Marketing", "agathe@lamzone.com"),
+            new Employee(11,"Thibault", "Chris", "Directeur Technique", "Technique", "chris@lamzone.com")
+    );
     public static List<Employee> generateEmployees() { return new ArrayList<>(EMPLOYEES); }
 
 
-    public static List<Employee> FAKE_PARTICIPANTS_1 = Arrays.asList(
-            new Employee(1,"Durand", "Alex", "Commercial", "Commercial", "alex@lamzone.com", false),
-            new Employee(2,"Martin", "Amandine", "Directrice Commercial", "Commercial", "amandine@lamzone.com", true),
-            new Employee(3,"Gagné", "Paul", "Développeur", "Technique", "paul@lamzone.com", false)
-    );
-
-    static List<Employee> generateFakeParticipants1() { return new ArrayList<>(FAKE_PARTICIPANTS_1); }
-
-    public static List<Employee> FAKE_PARTICIPANTS_2 = Arrays.asList(
-            new Employee(4,"Tremblay", "Antoine", "Direncteur Achats", "Achats", "antoine@lamzone.com", true),
-            new Employee(5,"Dupont", "Viviane", "Assistante", "Commercial", "viviane@lamzone.com", false),
-            new Employee(6,"Côté", "Justin", "Directeur RH", "RH", "justin@lamzone.com", true),
-            new Employee(7,"Lapointe", "Gaelle", "Développeuse", "Technique", "gaelle@lamzone.com", false),
-            new Employee(8,"Leblanc", "Martin", "Comptable", "Finance", "martin@lamzone.com", true)
-    );
-    static List<Employee> generateFakeParticipants2() { return new ArrayList<>(FAKE_PARTICIPANTS_2); }
-
-    public static List<Employee> FAKE_PARTICIPANTS_3 = Arrays.asList(
-            new Employee(9,"Poirier", "Luc", "Assistant Marketing", "Marketing", "luc@lamzone.com", false),
-            new Employee(10,"Fournier", "Agathe", "Directrice Marketing", "Marketing", "agathe@lamzone.com", true),
-            new Employee(11,"Thibault", "Chris", "Directeur Technique", "Technique", "chris@lamzone.com", true)
-    );
-    static List<Employee> generateFakeParticipants3() { return new ArrayList<>(FAKE_PARTICIPANTS_3); }
-
-    public static Date addDays(Date d)  {
-        int days = new Random().nextInt(8);
-        d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
-        return d;
-    }
-
     public static List<Meeting> Dummy_Meetings = Arrays.asList(
-           );
-
-   public static List<Meeting> generateMeetings() { return new ArrayList<>(Dummy_Meetings); }
-
-    public static List<Meeting> Dummy_Random_Meetings = Arrays.asList(
-            new Meeting(10,"Subject L",generateMeetingRooms().get(7),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
-            new Meeting(11,"Subject M",generateMeetingRooms().get(9),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants3())),
-            new Meeting(12,"Subject N",generateMeetingRooms().get(8),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateEmployees())),
-            new Meeting(13,"Subject O",generateMeetingRooms().get(6),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
-            new Meeting(14,"Subject P",generateMeetingRooms().get(4),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants1())));
+    );
+    public static List<Meeting> generateMeetings() { return new ArrayList<>(Dummy_Meetings); }
 
 
-    }
+}
 

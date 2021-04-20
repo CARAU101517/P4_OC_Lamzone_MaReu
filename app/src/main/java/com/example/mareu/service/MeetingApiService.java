@@ -25,11 +25,6 @@ public interface MeetingApiService {
     void deleteMeeting(Meeting meeting);
 
     /**
-     * Generate random meeting
-     */
-    void generateRandomMeeting();
-
-    /**
      * Create a meeting
      *
      * @param meeting

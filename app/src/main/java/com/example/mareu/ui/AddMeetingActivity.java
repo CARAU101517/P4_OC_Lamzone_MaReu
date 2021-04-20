@@ -66,7 +66,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     final Calendar calendarEnd = Calendar.getInstance(Locale.FRANCE);
 
     MeetingApiService meetingApiService;
-    Meeting mMeeting;
 
 
 

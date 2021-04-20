@@ -27,14 +27,22 @@ public void setup() {
         }
 
 @Test
-public void getMeetingWithSuccess(){
+public void getMeetingsWithSuccess(){
+        Meeting meeting1ToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test 1", service.getMeetingRooms().get(3),
+                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+        service.createMeeting(meeting1ToCreate);
+        Meeting meeting2ToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test 2", service.getMeetingRooms().get(6),
+                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+        service.createMeeting(meeting2ToCreate);
         List<Meeting> meetings = service.getMeeting();
-        List<Meeting> expectedMeetings = DummyMeetingGenerator.Dummy_Meetings;
-        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
+        assertEquals(2, meetings.size());
         }
 
 @Test
 public void deleteMeetingWithSuccess() {
+        Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test", service.getMeetingRooms().get(5),
+                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+        service.createMeeting(meetingToCreate);
         Meeting meetingToDelete = service.getMeeting().get(0);
         service.deleteMeeting(meetingToDelete);
         assertFalse(service.getMeeting().contains(meetingToDelete));
@@ -46,6 +54,8 @@ public void createMeetingWithSuccess() {
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
         service.createMeeting(meetingToCreate);
         assertTrue(service.getMeeting().contains(meetingToCreate));
+        List<Meeting> meetings = service.getMeeting();
+        assertEquals(1, meetings.size());
         }
 
 }

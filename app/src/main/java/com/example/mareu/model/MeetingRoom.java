@@ -33,7 +33,7 @@ public class MeetingRoom {
 
 
 
-   /**
+    /**
      * Constructor
      */
 
@@ -97,8 +97,8 @@ public class MeetingRoom {
     }
 
     public String toString() {
-            int capacity = getCapacity() ;
-            String capacityNb = String.valueOf(capacity);
+        int capacity = getCapacity() ;
+        String capacityNb = String.valueOf(capacity);
         return (roomName + " - "+ "Capacité de " + capacityNb + " personnes");
     }
 

@@ -1,9 +1,7 @@
 package com.example.mareu.model;
 
 import java.util.Objects;
-import java.util.Random;
 
-import static com.example.mareu.service.DummyMeetingGenerator.Dummy_Random_Meetings;
 
 public class Employee {
 
@@ -37,24 +35,18 @@ public class Employee {
      */
     private String email;
 
-    /**
-     * Planner?
-     */
-    private boolean planner = false;
-
 
     /**
      * Constructor
      */
 
-    public Employee(int id, String lastName, String firstName, String job, String department, String email, boolean planner) {
+    public Employee(int id, String lastName, String firstName, String job, String department, String email) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.job = job;
         this.department = department;
         this.email = email;
-        this.planner = planner;
     }
 
 
@@ -108,13 +100,6 @@ public class Employee {
         this.email = email;
     }
 
-    public boolean isPlanner() {
-        return planner;
-    }
-
-    public void setPlanner(boolean planner) {
-        this.planner = planner;
-    }
 
     @Override
     public boolean equals(Object o) {
