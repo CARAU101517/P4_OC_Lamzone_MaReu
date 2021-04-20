@@ -80,15 +80,7 @@ public abstract class DummyMeetingGenerator {
     }
 
     public static List<Meeting> Dummy_Meetings = Arrays.asList(
-            new Meeting(1,"Subject A",generateMeetingRooms().get(6),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
-            new Meeting(2,"Subject B",generateMeetingRooms().get(2),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants1())),
-            new Meeting(3,"Subject C",generateMeetingRooms().get(5),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateEmployees())),
-            new Meeting(4,"Subject D",generateMeetingRooms().get(7),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
-            new Meeting(5,"Subject E",generateMeetingRooms().get(3),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateEmployees())),
-            new Meeting(6,"Subject F",generateMeetingRooms().get(9),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants3())),
-            new Meeting(7,"Subject I",generateMeetingRooms().get(1),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants2())),
-            new Meeting(8,"Subject J",generateMeetingRooms().get(4),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateFakeParticipants1())),
-            new Meeting(9,"Subject K",generateMeetingRooms().get(0),addDays(Calendar.getInstance().getTime()),addDays(Calendar.getInstance().getTime()),new ArrayList<Employee>(generateEmployees())));
+           );
 
    public static List<Meeting> generateMeetings() { return new ArrayList<>(Dummy_Meetings); }
 
