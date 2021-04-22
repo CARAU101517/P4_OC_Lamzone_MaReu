@@ -1,5 +1,6 @@
 package com.carine.p4_oc_mareu;
 
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
@@ -31,6 +32,7 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
@@ -92,16 +94,31 @@ public class MeetingListTest {
     @Test
     public void myMeetingsList_shouldNotBeEmpty() {
         //On the first page, we have the 3 meetings added in the SetUp
-        onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasMinimumChildCount(ITEMS_COUNT)));
+        onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
     }
 
-    @Test
+     @Test
     public void myAddMeeting_clickAction_shouldDisplayActivity() {
         // When : we click on the AddFabButton
         onView(ViewMatchers.withId(R.id.add_meeting)).perform(click());
         // Then : Go to the AddMeetingActiviy
         onView(ViewMatchers.withId(R.id.activity_add_meeting)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void myCreateMeetingAction_shouldAddItem() {
+        // When : we click on the AddFabButton
+        onView(ViewMatchers.withId(R.id.add_meeting)).perform(click());
+        // and on the Subject
+        onView(ViewMatchers.withId(R.id.add_meeting_subject)).perform(click());
+        // we type a text in the subject
+        onView(ViewMatchers.withId(R.id.meeting_subjectLyt)).perform(typeText("Test"));
+        // and we click on the saveButton
+        onView(ViewMatchers.withId(R.id.save_meeting)).perform(click());
+        // Then : The Meetings List has 4 items
+        onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(ITEMS_COUNT +1)));
+    }
+
 /*
     @Test
     public void myMeetingsList_deleteAction_shouldRemoveItem()
