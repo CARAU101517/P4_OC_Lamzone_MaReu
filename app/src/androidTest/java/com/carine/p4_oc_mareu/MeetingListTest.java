@@ -40,6 +40,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
 
@@ -79,10 +80,10 @@ public class MeetingListTest {
         Meeting meetingTest1 = new Meeting(1, "Test1", DummyMeetingGenerator.generateMeetingRooms().get(2),
                 DummyMeetingGenerator.addDays(Calendar.getInstance().getTime()), DummyMeetingGenerator.addDays(Calendar.getInstance().getTime()),
                 new ArrayList<>(DummyMeetingGenerator.generateFakeParticipants()));
-        Meeting meetingTest2 = new Meeting(1, "Test2", DummyMeetingGenerator.generateMeetingRooms().get(6),
+        Meeting meetingTest2 = new Meeting(2, "Test2", DummyMeetingGenerator.generateMeetingRooms().get(6),
                 DummyMeetingGenerator.addDays(Calendar.getInstance().getTime()), DummyMeetingGenerator.addDays(Calendar.getInstance().getTime()),
                 new ArrayList<>(DummyMeetingGenerator.generateFakeParticipants()));
-        Meeting meetingTest3 = new Meeting(1, "Test3", DummyMeetingGenerator.generateMeetingRooms().get(8),
+        Meeting meetingTest3 = new Meeting(3, "Test3", DummyMeetingGenerator.generateMeetingRooms().get(8),
             DummyMeetingGenerator.addDays(Calendar.getInstance().getTime()), DummyMeetingGenerator.addDays(Calendar.getInstance().getTime()),
             new ArrayList<>(DummyMeetingGenerator.generateFakeParticipants()));
 
@@ -121,22 +122,18 @@ public class MeetingListTest {
 
 /*
     @Test
-    public void myMeetingsList_deleteAction_shouldRemoveItem()
-    {
+    public void myMeetingsList_deleteAction_shouldRemoveItem() {
         // Given : We check that we have 3 Meetings
-        onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
-
-        // When : We perform a click on Meeting's position 1 delete button
-        onView(ViewMatchers.withId(R.id.item_list_delete_button))
+        onView(allOf(withId(R.id.activity_meeting_list), isDisplayingAtLeast(60))).check(matches(hasChildCount(ITEMS_COUNT)));
+        // When perform a click on a delete icon
+        onView(allOf(withId(R.id.activity_meeting_list), isDisplayingAtLeast(60)))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-
-        // Then : The Meetings List has 2 items
-        onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(ITEMS_COUNT-1)));
+        // Then : the number of element is 11
+        onView(allOf(withId(R.id.activity_meeting_list), isDisplayingAtLeast(60))).check(matches(hasChildCount(ITEMS_COUNT-1)));
     }
 **/
     @Test
-    public void myMeetingsList_clickToolbarAction_shouldDisplayFilterDate()
-    {
+    public void myMeetingsList_clickToolbarAction_shouldDisplayFilterDate() {
         // Given : We check that we have 3 meetings
         onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasMinimumChildCount(ITEMS_COUNT)));
 
@@ -145,14 +142,12 @@ public class MeetingListTest {
         onView(withId(R.id.date_filter)).perform(click());
         onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(2021, 4, 21));
         onView(ViewMatchers.withText("ok")).perform(click());
-
         // Then : We have the meetings with this date
         onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasMinimumChildCount(2)));
     }
 
     @Test
-    public void myMeetingsList_clickToolbarAction_shouldDisplayFilterRoom()
-    {
+    public void myMeetingsList_clickToolbarAction_shouldDisplayFilterRoom() {
         // Given : We check that we have 3 Meetings
         onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
 
@@ -177,14 +172,11 @@ public class MeetingListTest {
         // click on the chosen room
         onView(ViewMatchers.withText("Cape Town")).perform(click());
         onView(ViewMatchers.withText("ok")).perform(click());
-
         // Then : The list has 1 meeting
         onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(1)));
-
         // When : We click on the toolbar and choose all filter
         onView(withId(R.menu.filter_menu)).perform(click());
         onView(withId(R.id.all_filter)).perform(click());
-
         // Then : The list has all the meetings
         onView(ViewMatchers.withId(R.id.activity_meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
     }

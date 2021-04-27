@@ -28,10 +28,10 @@ public void setup() {
 
 @Test
 public void getMeetingsWithSuccess(){
-        Meeting meeting1ToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test 1", service.getMeetingRooms().get(3),
+        Meeting meeting1ToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test 1", service.getMeetingRooms().get(3),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
         service.createMeeting(meeting1ToCreate);
-        Meeting meeting2ToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test 2", service.getMeetingRooms().get(6),
+        Meeting meeting2ToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test 2", service.getMeetingRooms().get(6),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
         service.createMeeting(meeting2ToCreate);
         List<Meeting> meetings = service.getMeeting();
@@ -40,7 +40,7 @@ public void getMeetingsWithSuccess(){
 
 @Test
 public void deleteMeetingWithSuccess() {
-        Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test", service.getMeetingRooms().get(5),
+        Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test", service.getMeetingRooms().get(5),
                 Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
         service.createMeeting(meetingToCreate);
         Meeting meetingToDelete = service.getMeeting().get(0);
@@ -48,14 +48,5 @@ public void deleteMeetingWithSuccess() {
         assertFalse(service.getMeeting().contains(meetingToDelete));
         }
 
-@Test
-public void createMeetingWithSuccess() {
-        Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"Mon meeting Test", service.getMeetingRooms().get(8),
-                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
-        service.createMeeting(meetingToCreate);
-        assertTrue(service.getMeeting().contains(meetingToCreate));
-        List<Meeting> meetings = service.getMeeting();
-        assertEquals(1, meetings.size());
-        }
 
 }
