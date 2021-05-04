@@ -13,8 +13,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
+import com.example.mareu.di.DI;
 import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.service.MeetingApiService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,11 +29,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private List<Meeting> mMeeting;
     private List<Meeting> filterList;
     SimpleDateFormat dateAndTimeFormat = new SimpleDateFormat("dd/MM/yy"+" - "+"HH:mm", Locale.FRANCE);
+    MeetingApiService meetingApiService;
 
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
         mMeeting = items;
         filterList = items;
+        meetingApiService = DI.getMeetingApiService();
     }
 
     @NonNull
@@ -134,38 +138,23 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         void OnItemClicked(Meeting meeting);
     }
 
-    public void filterRoom(ArrayList<String> rooms ) {
-        if (rooms == null || rooms.isEmpty()){
+
+    public void filterRoom(ArrayList<String> rooms) {
+        if (rooms == null || rooms.isEmpty()) {
             filterList = mMeeting;
-        }else {
-            ArrayList<Meeting> resultList = new ArrayList<>();
-            for (String room : rooms) {
-                for (Meeting meeting : mMeeting) {
-                    if (room.equalsIgnoreCase(meeting.getLocalisation().getRoomName())) {
-                        resultList.add(meeting);
-                    }
-                }
-                filterList = resultList;
-            }
+        } else {
+            filterList = meetingApiService.getMeetingsFromRoomFilter(rooms, mMeeting);
         }
         notifyDataSetChanged();
     }
 
     public void filterDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
         if (date == null) {
             filterList = mMeeting;
         } else {
-            ArrayList<Meeting> resultListDate = new ArrayList<>();
-            for (Meeting meeting : mMeeting) {
-                if (sdf.format(date).equalsIgnoreCase(sdf.format(meeting.getStartDate()))) {
-                    resultListDate.add(meeting);
-                }
-                filterList = resultListDate;
-            }
+            filterList = meetingApiService.getMeetingsFromDateFilter(date, mMeeting);
         }
         notifyDataSetChanged();
     }
-
 
 }

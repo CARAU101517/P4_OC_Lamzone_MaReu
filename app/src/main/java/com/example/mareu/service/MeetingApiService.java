@@ -4,6 +4,8 @@ import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,4 +48,20 @@ public interface MeetingApiService {
      */
     List<Employee> getEmployees();
 
+
+    /**
+     *
+     * @param rooms
+     * @param meetings
+     * @return List of meeting from rooms
+     */
+    List<Meeting> getMeetingsFromRoomFilter(ArrayList<String> rooms, List<Meeting> meetings);
+
+    /**
+     *
+     * @param date
+     * @param meetings
+     * @return List of meeting from date
+     */
+    List<Meeting> getMeetingsFromDateFilter(Date date, List<Meeting> meetings);
 }

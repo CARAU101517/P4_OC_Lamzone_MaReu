@@ -55,7 +55,13 @@ public abstract class DummyMeetingGenerator {
 
     public static List<Employee> generateFakeParticipants() { return new ArrayList<>(FAKE_PARTICIPANTS); }
 
-    public static Date addDays(Date d)  {
+    public static Date addStartDate(Date d)  {
+        int days = new Random().nextInt(8);
+        d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
+        return d;
+    }
+
+    public static Date addEndDate(Date d)  {
         int days = new Random().nextInt(8);
         d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
         return d;
