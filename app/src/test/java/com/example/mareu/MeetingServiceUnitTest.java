@@ -28,35 +28,6 @@ public void setup() {
         service = DI.getNewInstanceApiService();
         }
 
-@Test
-public void getMeetingsWithSuccess(){
-        Meeting meeting1ToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test 1", service.getMeetingRooms().get(3),
-                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
-        service.createMeeting(meeting1ToCreate);
-        Meeting meeting2ToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test 2", service.getMeetingRooms().get(6),
-                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
-        service.createMeeting(meeting2ToCreate);
-        List<Meeting> meetings = service.getMeeting();
-        assertEquals(2, meetings.size());
-        }
-
-@Test
-public void deleteMeetingWithSuccess() {
-        Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test", service.getMeetingRooms().get(5),
-                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
-        service.createMeeting(meetingToCreate);
-        Meeting meetingToDelete = service.getMeeting().get(0);
-        service.deleteMeeting(meetingToDelete);
-        assertFalse(service.getMeeting().contains(meetingToDelete));
-        }
-
-        @Test
-        public void createMeetingWithSuccess() {
-                Meeting meetingToCreate = new Meeting(1, "My meeting Test", DummyMeetingGenerator.generateMeetingRooms().get(1),
-                Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
-                service.createMeeting(meetingToCreate);
-                assertTrue(service.getMeeting().contains(meetingToCreate));
-        }
 
         @Test
         public void generateListMeetingWithSuccess() {
@@ -64,6 +35,37 @@ public void deleteMeetingWithSuccess() {
                 int listSize = lMeetings.size();
                 assertEquals(0, listSize);
         }
+
+        @Test
+        public void createMeetingWithSuccess() {
+                Meeting meetingToCreate = new Meeting(1, "My meeting Test", DummyMeetingGenerator.generateMeetingRooms().get(1),
+                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+                service.createMeeting(meetingToCreate);
+                assertTrue(service.getMeeting().contains(meetingToCreate));
+        }
+
+        @Test
+        public void getMeetingsWithSuccess(){
+                Meeting meeting1ToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test 1", service.getMeetingRooms().get(3),
+                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+                service.createMeeting(meeting1ToCreate);
+                Meeting meeting2ToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test 2", service.getMeetingRooms().get(6),
+                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+                service.createMeeting(meeting2ToCreate);
+                List<Meeting> meetings = service.getMeeting();
+                assertEquals(2, meetings.size());
+        }
+
+        @Test
+        public void deleteMeetingWithSuccess() {
+                Meeting meetingToCreate = new Meeting((int) service.getMeeting().size(),"meeting Test", service.getMeetingRooms().get(5),
+                        Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), (ArrayList<Employee>) service.getEmployees());
+                service.createMeeting(meetingToCreate);
+                Meeting meetingToDelete = service.getMeeting().get(0);
+                service.deleteMeeting(meetingToDelete);
+                assertFalse(service.getMeeting().contains(meetingToDelete));
+        }
+
 
         @Test
         public void createMeetingRoomWithSuccess() {
