@@ -103,10 +103,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         addRoomSpinner();
 
-        mEmails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { addParticipants();}
-        });
+        addParticipants();
 
         mSubject.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -236,7 +233,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         employees.addAll(DummyMeetingGenerator.generateEmployees());
         ArrayAdapter<Employee> adapter = new ArrayAdapter<Employee>(this, android.R.layout.simple_list_item_1, employees);
         mEmails.setAdapter(adapter);
-        mEmails.setThreshold(1);
         mEmails.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 

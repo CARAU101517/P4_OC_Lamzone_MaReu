@@ -44,7 +44,6 @@ public class MeetingListActivity extends AppCompatActivity {
     MeetingApiService meetingApiService;
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +94,12 @@ public class MeetingListActivity extends AppCompatActivity {
         //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.filter_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
