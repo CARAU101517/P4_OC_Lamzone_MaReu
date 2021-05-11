@@ -11,6 +11,7 @@ import com.example.mareu.ui.utils.DeleteViewAction;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.AllOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -428,6 +429,7 @@ public class MeetingListActivityTest {
                         isDisplayed()));
         button.check(matches(isDisplayed()));
     }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

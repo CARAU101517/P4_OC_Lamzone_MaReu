@@ -8,11 +8,13 @@ import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public abstract class DummyMeetingGenerator {
@@ -47,29 +49,9 @@ public abstract class DummyMeetingGenerator {
     );
     public static List<Employee> generateEmployees() { return new ArrayList<>(EMPLOYEES); }
 
-    public static List<Employee> FAKE_PARTICIPANTS = Arrays.asList(
-            new Employee(1,"Durand", "Alex", "Commercial", "Commercial", "alex@lamzone.com"),
-            new Employee(2,"Martin", "Amandine", "Directrice Commercial", "Commercial", "amandine@lamzone.com"),
-            new Employee(3,"Gagné", "Paul", "Développeur", "Technique", "paul@lamzone.com")
-    );
-
-    public static List<Employee> generateFakeParticipants() { return new ArrayList<>(FAKE_PARTICIPANTS); }
-
-    public static Date addStartDate(Date d)  {
-        int days = new Random().nextInt(8);
-        d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
-        return d;
-    }
-
-    public static Date addEndDate(Date d)  {
-        int days = new Random().nextInt(8);
-        d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
-        return d;
-    }
-
-
     public static List<Meeting> Dummy_Meetings = Arrays.asList(
     );
+
     public static List<Meeting> generateMeetings() { return new ArrayList<>(Dummy_Meetings); }
 
 
