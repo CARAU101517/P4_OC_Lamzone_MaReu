@@ -456,7 +456,7 @@ public class FiltersMeetingListTest {
                                 1),
                         isDisplayed()));
         materialTextView.perform(click());
-        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,05,14));
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,12,29));
 
         ViewInteraction materialButton = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
@@ -572,7 +572,7 @@ public class FiltersMeetingListTest {
                                 1),
                         isDisplayed()));
         materialTextView4.perform(click());
-        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,05,13));
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,11,20));
 
         ViewInteraction materialButton6 = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
@@ -687,7 +687,7 @@ public class FiltersMeetingListTest {
                                 1),
                         isDisplayed()));
         materialTextView7.perform(click());
-        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,05,14));
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,12,29));
         ViewInteraction materialButton11 = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
                         childAtPosition(
@@ -801,7 +801,7 @@ public class FiltersMeetingListTest {
                         isDisplayed()));
         appCompatTextView.perform(click());
 
-        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,05,14));
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21,12,29));
         ViewInteraction appCompatButton = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
                         childAtPosition(

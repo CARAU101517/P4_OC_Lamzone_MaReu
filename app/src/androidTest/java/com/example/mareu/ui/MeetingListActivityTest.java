@@ -4,6 +4,7 @@ package com.example.mareu.ui;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.DatePicker;
 
 import com.example.mareu.R;
 import com.example.mareu.ui.utils.DeleteViewAction;
@@ -18,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
@@ -32,6 +34,7 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -147,7 +150,7 @@ public class MeetingListActivityTest {
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
-                .atPosition(1);
+                .atPosition(5);
         appCompatCheckedTextView.perform(click());
 
         ViewInteraction appCompatMultiAutoCompleteTextView = onView(
@@ -164,7 +167,7 @@ public class MeetingListActivityTest {
         ViewInteraction textInputEditText = onView(
                 allOf(withId(R.id.add_meeting_subject),
                         isDisplayed()));
-        textInputEditText.perform(replaceText("Test 2"), closeSoftKeyboard());
+        textInputEditText.perform(replaceText("Test 1"), closeSoftKeyboard());
 
         ViewInteraction materialButton5 = onView(
                 allOf(withId(R.id.save_meeting), withText("Enregistrer"),
@@ -268,7 +271,7 @@ public class MeetingListActivityTest {
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
-                .atPosition(1);
+                .atPosition(7);
         appCompatCheckedTextView.perform(click());
 
         ViewInteraction appCompatMultiAutoCompleteTextView = onView(
@@ -285,7 +288,7 @@ public class MeetingListActivityTest {
         ViewInteraction textInputEditText = onView(
                 allOf(withId(R.id.add_meeting_subject),
                         isDisplayed()));
-        textInputEditText.perform(replaceText("Test 2"), closeSoftKeyboard());
+        textInputEditText.perform(replaceText("Test"), closeSoftKeyboard());
 
         ViewInteraction materialButton5 = onView(
                 allOf(withId(R.id.save_meeting), withText("Enregistrer"),
